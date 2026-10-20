@@ -68,8 +68,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,7,13,.72);b
 .mini-stats div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
 .mini-stats b{display:block;font-family:'Space Grotesk';font-size:1.3rem}
 .mini-stats span{font-size:.74rem;color:var(--muted)}
-.float{position:absolute;padding:10px 16px;background:#14142a;border:1px solid var(--line);border-radius:14px;font-size:.82rem;box-shadow:0 20px 40px -15px #000;animation:fl 5s ease-in-out infinite}
-.float.f1{top:-18px;right:-14px}.float.f2{bottom:-16px;left:-18px;animation-delay:1.5s}
+.hero-visual{position:relative;padding:26px 0}
+.hero-card{z-index:1}
+.float{position:absolute;z-index:3;padding:10px 16px;background:#14142a;border:1px solid rgba(124,92,255,.45);border-radius:14px;font-size:.82rem;white-space:nowrap;box-shadow:0 20px 40px -15px #000;animation:fl 5s ease-in-out infinite}
+.float.f1{top:0;right:-10px}.float.f2{bottom:0;left:-10px;animation-delay:1.5s}
 @keyframes fl{50%{transform:translateY(-10px)}}
 
 /* MARQUEE */
@@ -238,7 +240,18 @@ footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted);font-s
 .career-info{background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(34,211,238,.08));border:1px solid rgba(34,197,94,.3);border-radius:16px;padding:14px 18px;font-size:.88rem;color:#d8f5e3;align-self:stretch}
 
 /* RESPONSIVE */
+.hero-grid>*,.split>*,.hermes-box>*,.career-box>*,.pack>*{min-width:0}
+img,svg{max-width:100%}
+.chat-in input{font-size:16px}
+.mem{grid-template-columns:repeat(4,minmax(0,70px));justify-content:center}
+.ttt{grid-template-columns:repeat(3,minmax(0,92px));justify-content:center}
+.ttt button{height:auto;aspect-ratio:1/1}
+.mem button{height:auto;aspect-ratio:1/1}
 @media(max-width:960px){
+  .hero{padding:130px 0 70px}
+  .hero-visual{max-width:520px;margin:0 auto;width:100%}
+  .float.f1{right:8px}.float.f2{left:8px}
+  .hero p.lead{max-width:100%}
   .hero-grid,.split,.hermes-box,.career-box,.pack{grid-template-columns:1fr}
   .grid3,.contact-grid{grid-template-columns:1fr 1fr}
   .res-grid,.steps{grid-template-columns:1fr 1fr}
@@ -248,12 +261,36 @@ footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted);font-s
   .burger{display:block}
 }
 @media(max-width:620px){
+  body{padding-bottom:84px}
+  .wrap{padding:0 18px}
   section{padding:70px 0}
+  .hero-cta .btn{width:100%;justify-content:center}
+  .hero-visual{padding:18px 0}
+  .hero-card{padding:20px}
+  .bub{max-width:94%}
+  .mini-stats b{font-size:1.1rem}
+  .pack-main,.challenge{padding:28px 22px}
+  .pack-main .ribbon{position:static;display:inline-block;margin-bottom:14px}
+  .hermes-box,.career-box{padding:28px 20px;border-radius:24px}
+  .cta-band{padding:48px 20px;border-radius:24px}
+  .cta-band .btn{width:100%;justify-content:center;margin:6px 0}
+  .channels{grid-template-columns:1fr 1fr;gap:10px}
+  .channels div{padding:16px}
+  .card{padding:24px}
+  .g-tabs{flex-wrap:wrap}
+  .g-tab{flex:1 1 33%}
+  .foot{flex-direction:column;align-items:flex-start}
+  .fab{right:14px;bottom:14px;left:14px;align-items:stretch}
+  .fab .btn{justify-content:center}
+  .overlay{padding:0}
+  .chat{max-width:none;height:100dvh;border-radius:0;border:0}
+  .msgs{padding:16px}
+  .chips{padding:0 16px 10px}
+  .chat-in{padding:12px 14px calc(12px + env(safe-area-inset-bottom))}
   .grid3,.contact-grid,.res-grid,.steps{grid-template-columns:1fr}
   .hero{padding-top:130px}
-  .float{display:none}
-  .ttt{grid-template-columns:repeat(3,78px)}.ttt button{height:78px}
-  .g-body{padding:22px}
+  .float{font-size:.74rem;padding:8px 12px}
+  .g-body{padding:22px 14px}
   .g-tab{font-size:.8rem;padding:14px 6px}
   .comm b{font-size:4rem}
 }
@@ -295,7 +332,7 @@ footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted);font-s
       </div>
       <div class="trust"><span>All-in-one package</span><span>Hermes AI included</span><span>No scam pricing</span></div>
     </div>
-    <div style="position:relative">
+    <div class="hero-visual">
       <div class="float f1">⭐ Review boost active</div>
       <div class="float f2">📞 Calls answered 24/7</div>
       <div class="hero-card">
