@@ -1,1 +1,810 @@
-# readmekleosstudio
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KleOs | Marketing Like Never Before</title>
+<meta name="description" content="KleOs is an all-in-one marketing package: websites, social media, Google review management, Hermes AI, a lead finder, design, and 24/7 door-to-door outreach.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070d; --bg2:#0d0d18; --card:#11111f; --line:rgba(255,255,255,.08);
+  --text:#f2f2f8; --muted:#a3a3b8; --violet:#7c5cff; --cyan:#22d3ee; --green:#22c55e; --pink:#ff5cae;
+  --grad:linear-gradient(135deg,#7c5cff 0%,#22d3ee 100%);
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;line-height:1.1;letter-spacing:-.02em}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+section{padding:96px 0;position:relative}
+.glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.35;pointer-events:none;z-index:0}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.title{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:16px}
+.sub{color:var(--muted);max-width:660px;font-size:1.05rem}
+.center{text-align:center}.center .sub{margin:0 auto}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:.98rem;border:1px solid transparent;cursor:pointer;transition:.25s;font-family:inherit}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 40px -10px rgba(124,92,255,.7)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 48px -10px rgba(34,211,238,.6)}
+.btn-ghost{border-color:var(--line);background:rgba(255,255,255,.03);color:var(--text)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,7,13,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:'Space Grotesk';font-weight:700;font-size:1.5rem;display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:1rem;color:#fff}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a.l{color:var(--muted);font-size:.93rem;font-weight:500;transition:.2s}
+.nav-links a.l:hover{color:#fff}
+.burger{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+
+/* HERO */
+.hero{padding:170px 0 90px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;position:relative;z-index:1}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:7px 16px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);font-size:.84rem;color:var(--muted);margin-bottom:26px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.hero h1{font-size:clamp(2.6rem,6vw,4.6rem);margin-bottom:22px}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:560px;margin-bottom:34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
+.trust{display:flex;gap:26px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+.trust span::before{content:"✓ ";color:var(--green);font-weight:700}
+.hero-card{background:linear-gradient(160deg,#15152a,#0c0c18);border:1px solid var(--line);border-radius:28px;padding:26px;box-shadow:0 40px 100px -30px rgba(124,92,255,.5);position:relative}
+.hc-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.hc-av{width:42px;height:42px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-weight:700}
+.hc-head small{color:var(--green);display:block;font-size:.78rem}
+.bub{padding:12px 16px;border-radius:16px;font-size:.92rem;margin-bottom:10px;max-width:88%}
+.bub.b{background:#1b1b33;border-top-left-radius:4px}
+.bub.u{background:var(--grad);margin-left:auto;border-top-right-radius:4px}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.mini-stats div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.mini-stats b{display:block;font-family:'Space Grotesk';font-size:1.3rem}
+.mini-stats span{font-size:.74rem;color:var(--muted)}
+.float{position:absolute;padding:10px 16px;background:#14142a;border:1px solid var(--line);border-radius:14px;font-size:.82rem;box-shadow:0 20px 40px -15px #000;animation:fl 5s ease-in-out infinite}
+.float.f1{top:-18px;right:-14px}.float.f2{bottom:-16px;left:-18px;animation-delay:1.5s}
+@keyframes fl{50%{transform:translateY(-10px)}}
+
+/* MARQUEE */
+.marq{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:20px 0}
+.marq-track{display:flex;gap:56px;width:max-content;animation:mq 32s linear infinite;color:var(--muted);font-family:'Space Grotesk';font-size:1.15rem;font-weight:500}
+.marq-track span::after{content:"✦";margin-left:56px;color:var(--violet)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* SERVICES */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:54px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:.3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(500px circle at var(--mx,50%) var(--my,0),rgba(124,92,255,.14),transparent 40%);opacity:0;transition:.3s}
+.card:hover{transform:translateY(-5px);border-color:rgba(124,92,255,.5)}
+.card:hover::before{opacity:1}
+.ic{width:52px;height:52px;border-radius:14px;background:rgba(124,92,255,.15);display:grid;place-items:center;font-size:1.5rem;margin-bottom:18px;position:relative}
+.card h3{font-size:1.2rem;margin-bottom:8px;position:relative}
+.card p{color:var(--muted);font-size:.94rem;position:relative}
+
+/* DOOR TO DOOR */
+.d2d{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+.badge-top{display:inline-block;background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.3);padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:600;margin-bottom:18px}
+.checks{list-style:none;margin:26px 0 32px}
+.checks li{padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line);color:#d8d8e6}
+.checks li::before{content:"✓";position:absolute;left:0;top:10px;width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,.15);color:var(--green);display:grid;place-items:center;font-size:.8rem;font-weight:700}
+.channels{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.channels div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center}
+.channels div .e{font-size:2rem;display:block;margin-bottom:6px}
+.channels div b{font-family:'Space Grotesk'}
+.channels small{display:block;color:var(--muted)}
+
+/* HERMES */
+.hermes-box{background:linear-gradient(135deg,#17133a,#0b1a26);border:1px solid rgba(124,92,255,.35);border-radius:32px;padding:56px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;position:relative;overflow:hidden}
+.terminal{background:#06060c;border:1px solid var(--line);border-radius:18px;padding:20px;font-family:ui-monospace,Menlo,monospace;font-size:.84rem;color:#b8f5c9;min-height:230px}
+.terminal .dots{display:flex;gap:6px;margin-bottom:14px}
+.terminal .dots i{width:10px;height:10px;border-radius:50%;background:#333}
+.terminal p{margin-bottom:8px}.terminal .q{color:#9aa0ff}.terminal .a{color:#b8f5c9}
+.cursor{display:inline-block;width:8px;height:15px;background:#b8f5c9;vertical-align:middle;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* LEAD FINDER */
+.lf-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px}
+.lf-row{display:flex;align-items:center;gap:14px;padding:14px;border-radius:14px;background:rgba(255,255,255,.03);margin-bottom:10px;border:1px solid transparent;transition:.25s}
+.lf-row:hover{border-color:rgba(34,211,238,.4);transform:translateX(4px)}
+.lf-av{width:40px;height:40px;border-radius:12px;background:rgba(34,211,238,.12);display:grid;place-items:center}
+.lf-row b{display:block;font-size:.95rem}.lf-row small{color:var(--muted)}
+.tag{margin-left:auto;font-size:.72rem;padding:4px 10px;border-radius:999px;background:rgba(34,197,94,.12);color:var(--green);font-weight:600;white-space:nowrap}
+
+/* GAMES */
+.games{background:var(--bg2)}
+.game-shell{margin-top:48px;background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.g-tabs{display:flex;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.g-tab{flex:1;padding:18px;background:none;border:0;color:var(--muted);font:600 .95rem 'Inter';cursor:pointer;transition:.2s;border-bottom:2px solid transparent}
+.g-tab.on{color:#fff;border-bottom-color:var(--cyan);background:rgba(34,211,238,.05)}
+.g-body{padding:36px;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ttt{display:grid;grid-template-columns:repeat(3,92px);gap:10px;margin:18px 0}
+.ttt button{height:92px;border-radius:16px;border:1px solid var(--line);background:#161628;color:#fff;font:700 2.4rem 'Space Grotesk';cursor:pointer;transition:.2s}
+.ttt button:hover:not(:disabled){background:#1f1f3a}
+.ttt .x{color:var(--cyan)}.ttt .o{color:var(--pink)}
+.tap-btn{width:170px;height:170px;border-radius:50%;border:0;background:var(--grad);color:#fff;font:700 1.4rem 'Space Grotesk';cursor:pointer;box-shadow:0 20px 60px -15px var(--violet);transition:transform .08s;margin:18px 0}
+.tap-btn:active{transform:scale(.94)}
+.mem{display:grid;grid-template-columns:repeat(4,70px);gap:10px;margin:18px 0}
+.mem button{height:70px;border-radius:14px;border:1px solid var(--line);background:#161628;font-size:1.8rem;cursor:pointer;color:transparent;transition:.25s}
+.mem button.show{background:#242450;color:#fff;transform:rotateY(180deg)}
+.mem button.done{background:rgba(34,197,94,.2);color:#fff;border-color:var(--green)}
+.g-info{color:var(--muted);font-size:.95rem}
+.g-info b{color:#fff}
+
+/* PACKAGE */
+.pack{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:54px;align-items:start}
+.pack-main{background:linear-gradient(160deg,#1a1640,#0f1224);border:1px solid rgba(124,92,255,.5);border-radius:28px;padding:40px;position:relative}
+.pack-main .ribbon{position:absolute;top:22px;right:22px;background:var(--grad);padding:6px 14px;border-radius:999px;font-size:.76rem;font-weight:700}
+.pack-main h3{font-size:1.8rem;margin-bottom:6px}
+.price-line{font-size:1.1rem;color:var(--muted);margin-bottom:22px}
+.price-line b{font-size:2.2rem;color:#fff;font-family:'Space Grotesk'}
+.challenge{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:40px}
+.challenge h3{font-size:1.6rem;margin-bottom:14px}
+.challenge p{color:var(--muted);margin-bottom:14px}
+.win-quote{border-left:3px solid var(--violet);padding:6px 0 6px 18px;margin:22px 0;font-family:'Space Grotesk';font-size:1.25rem}
+
+/* RESULTS */
+.res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+.res{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;text-align:center}
+.res b{font-family:'Space Grotesk';font-size:2.3rem;display:block}
+.res span{color:var(--muted);font-size:.9rem}
+
+/* CAREERS */
+.careers{background:linear-gradient(180deg,var(--bg2),var(--bg))}
+.career-box{background:linear-gradient(135deg,#0f2a1c,#12122a);border:1px solid rgba(34,197,94,.35);border-radius:32px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.comm{text-align:center;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:24px;padding:36px}
+.comm b{font-family:'Space Grotesk';font-size:5rem;line-height:1;display:block;background:linear-gradient(135deg,#22c55e,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+.comm span{color:var(--muted)}
+
+/* PROCESS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:54px}
+.step{padding:28px;background:var(--card);border:1px solid var(--line);border-radius:20px}
+.step .n{font-family:'Space Grotesk';font-size:2.6rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step h4{margin:8px 0;font-size:1.1rem}.step p{color:var(--muted);font-size:.92rem}
+
+/* FAQ */
+.faq{max-width:780px;margin:48px auto 0}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin-bottom:12px}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:14px}
+.faq summary::after{content:"+";color:var(--cyan);font-size:1.4rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--muted);margin-top:12px;font-size:.95rem}
+
+/* CTA + CONTACT */
+.cta-band{background:var(--grad);border-radius:32px;padding:64px 30px;text-align:center}
+.cta-band h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:14px}
+.cta-band p{max-width:560px;margin:0 auto 28px;opacity:.92}
+.cta-band .btn{background:#07070d;color:#fff;margin:6px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.c-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:32px;text-align:center;transition:.3s;display:block}
+.c-card:hover{transform:translateY(-5px);border-color:var(--cyan)}
+.c-card .e{font-size:2rem;display:block;margin-bottom:10px}
+.c-card b{display:block;font-family:'Space Grotesk';font-size:1.15rem;margin-bottom:4px}
+.c-card span{color:var(--muted);font-size:.95rem;word-break:break-all}
+footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted);font-size:.9rem}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a:hover{color:#fff}
+
+/* FLOATING BUTTON */
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.fab .btn{box-shadow:0 14px 40px -8px rgba(0,0,0,.7)}
+
+/* CHAT MODAL */
+.overlay{position:fixed;inset:0;background:rgba(3,3,8,.78);backdrop-filter:blur(6px);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.chat{width:100%;max-width:520px;height:min(720px,92vh);background:#0d0d1a;border:1px solid rgba(124,92,255,.4);border-radius:26px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 120px -20px rgba(124,92,255,.5);animation:pop .3s}
+@keyframes pop{from{transform:scale(.94);opacity:0}}
+.chat-head{padding:18px 22px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#17133a,#0d1a26)}
+.chat-head .hc-av{width:40px;height:40px}
+.chat-head b{display:block;font-family:'Space Grotesk'}
+.chat-head small{color:var(--green);font-size:.78rem}
+.x-btn{margin-left:auto;background:rgba(255,255,255,.06);border:0;color:#fff;width:34px;height:34px;border-radius:50%;font-size:1.1rem;cursor:pointer}
+.x-btn:hover{background:rgba(255,255,255,.14)}
+.prog{height:3px;background:rgba(255,255,255,.06)}
+.prog i{display:block;height:100%;width:0;background:var(--grad);transition:width .4s}
+.msgs{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.m{max-width:86%;padding:12px 16px;border-radius:18px;font-size:.94rem;animation:up .3s;white-space:pre-wrap}
+@keyframes up{from{transform:translateY(8px);opacity:0}}
+.m.bot{background:#1a1a33;border-top-left-radius:5px;align-self:flex-start}
+.m.me{background:var(--grad);border-top-right-radius:5px;align-self:flex-end}
+.typing{align-self:flex-start;background:#1a1a33;padding:14px 18px;border-radius:18px;border-top-left-radius:5px;display:flex;gap:5px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#8b8bb0;animation:ty 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes ty{40%{transform:translateY(-5px);opacity:.5}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 10px}
+.chip{background:rgba(124,92,255,.14);border:1px solid rgba(124,92,255,.5);color:#fff;padding:9px 16px;border-radius:999px;font:500 .88rem 'Inter';cursor:pointer;transition:.2s}
+.chip:hover{background:var(--violet)}
+.chat-in{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--line)}
+.chat-in input{flex:1;background:#14142a;border:1px solid var(--line);border-radius:999px;padding:13px 20px;color:#fff;font:inherit;outline:none}
+.chat-in input:focus{border-color:var(--violet)}
+.send{width:46px;height:46px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:1.1rem;cursor:pointer}
+.send:disabled,.chat-in input:disabled{opacity:.4;cursor:not-allowed}
+.done-screen{flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+.done-screen.show{display:flex}
+.check-circle{width:110px;height:110px;border-radius:50%;background:rgba(34,197,94,.14);display:grid;place-items:center;margin-bottom:24px;animation:pop .5s}
+.check-circle svg{width:64px;height:64px}
+.check-circle path{stroke:var(--green);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .7s .3s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done-screen h3{font-size:1.7rem;margin-bottom:10px}
+.done-screen p{color:var(--muted);max-width:340px;margin-bottom:24px}
+.career-info{background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(34,211,238,.08));border:1px solid rgba(34,197,94,.3);border-radius:16px;padding:14px 18px;font-size:.88rem;color:#d8f5e3;align-self:stretch}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-grid,.split,.hermes-box,.career-box,.pack{grid-template-columns:1fr}
+  .grid3,.contact-grid{grid-template-columns:1fr 1fr}
+  .res-grid,.steps{grid-template-columns:1fr 1fr}
+  .hermes-box,.career-box{padding:34px}
+  .nav-links{position:absolute;top:70px;left:0;right:0;background:#0b0b16;flex-direction:column;padding:22px;gap:18px;border-bottom:1px solid var(--line);display:none}
+  .nav-links.open{display:flex}
+  .burger{display:block}
+}
+@media(max-width:620px){
+  section{padding:70px 0}
+  .grid3,.contact-grid,.res-grid,.steps{grid-template-columns:1fr}
+  .hero{padding-top:130px}
+  .float{display:none}
+  .ttt{grid-template-columns:repeat(3,78px)}.ttt button{height:78px}
+  .g-body{padding:22px}
+  .g-tab{font-size:.8rem;padding:14px 6px}
+  .comm b{font-size:4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="logo"><span class="logo-mark">K</span>KleOs</a>
+    <div class="nav-links" id="navLinks">
+      <a class="l" href="#services">Services</a>
+      <a class="l" href="#door">Door-to-Door</a>
+      <a class="l" href="#hermes">Hermes AI</a>
+      <a class="l" href="#games">Free Games</a>
+      <a class="l" href="#package">Package</a>
+      <a class="l" href="#careers">Careers</a>
+      <a class="l" href="#contact">Contact</a>
+      <button class="btn btn-primary" onclick="openChat('marketing')">Need Marketing</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="glow" style="width:520px;height:520px;background:#7c5cff;top:-120px;left:-160px"></div>
+  <div class="glow" style="width:420px;height:420px;background:#22d3ee;bottom:-100px;right:-100px"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill"><span class="dot"></span> Phones answered 24 hours a day</div>
+      <h1>Marketing <span class="grad-text">like never before.</span></h1>
+      <p class="lead">Websites, social media, Google reviews, your own AI, a lead finder, custom design, and a team knocking on doors, calling and messaging for you every single day. One package. Lower than anything you've been quoted.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="openChat('marketing')">🚀 I Need Marketing</button>
+        <a class="btn btn-ghost" href="#services">Explore Services</a>
+        <a class="btn btn-ghost" href="tel:+19563179493">📞 Call Now</a>
+      </div>
+      <div class="trust"><span>All-in-one package</span><span>Hermes AI included</span><span>No scam pricing</span></div>
+    </div>
+    <div style="position:relative">
+      <div class="float f1">⭐ Review boost active</div>
+      <div class="float f2">📞 Calls answered 24/7</div>
+      <div class="hero-card">
+        <div class="hc-head"><div class="hc-av">H</div><div><b>Hermes</b><small>● online</small></div></div>
+        <div class="bub b">Hey! I'm Hermes, your KleOs marketing assistant. What are we growing today?</div>
+        <div class="bub u">I want more customers walking in.</div>
+        <div class="bub b">On it. Lead Finder is pulling local prospects while our team starts outreach.</div>
+        <div class="mini-stats">
+          <div><b>24/7</b><span>Phone line</span></div>
+          <div><b>1</b><span>Simple package</span></div>
+          <div><b>∞</b><span>Outreach effort</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-track" id="marq"></div></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">What we do</span><h2 class="title">Everything your business needs to <span class="grad-text">grow</span>.</h2><p class="sub">Stop paying five different companies. KleOs puts it all under one roof, one team, one price.</p></div>
+    <div class="grid3">
+      <div class="card reveal"><div class="ic">🌐</div><h3>Websites</h3><p>Fast, modern, mobile-ready websites built to turn visitors into calls and customers.</p></div>
+      <div class="card reveal"><div class="ic">📱</div><h3>Social Media</h3><p>Content, posting and management so your brand stays active and impossible to ignore.</p></div>
+      <div class="card reveal"><div class="ic">⭐</div><h3>Google Review Boost</h3><p>We help you earn more five-star reviews and manage your reputation every day.</p></div>
+      <div class="card reveal"><div class="ic">🧹</div><h3>Bad Review Removal</h3><p>We work to remove unfair and bad Google reviews and protect your online image.</p></div>
+      <div class="card reveal"><div class="ic">🤖</div><h3>Hermes AI</h3><p>Our own AI comes included with your package to help you work faster and smarter.</p></div>
+      <div class="card reveal"><div class="ic">🎯</div><h3>Lead Finder</h3><p>Find local prospects in seconds. Included at little to no cost at all.</p></div>
+      <div class="card reveal"><div class="ic">🎨</div><h3>Graphic Design</h3><p>Our designers create your logo, branding, flyers, and more, made just for you.</p></div>
+      <div class="card reveal"><div class="ic">💬</div><h3>Business Guidance</h3><p>Questions about your business? Ask us. We help you think through it.</p></div>
+      <div class="card reveal"><div class="ic">🩺</div><h3>Diagnostics</h3><p>We look at what is and isn't working and show you exactly where to fix it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOOR TO DOOR -->
+<section class="d2d" id="door">
+  <div class="glow" style="width:420px;height:420px;background:#22c55e;top:20%;right:-140px;opacity:.18"></div>
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="badge-top">⭐ Our highest-rated technique</span>
+      <h2 class="title">The <span class="grad-text">Door-to-Door</span> technique.</h2>
+      <p class="sub">While others wait for customers to find them, we go get them. Our team calls, messages and reaches out to potential clients all day, every day, for you.</p>
+      <ul class="checks">
+        <li>Constant movement and steady client acquisition</li>
+        <li>Calls, texts and direct messages to real prospects</li>
+        <li>Always at customer service, and we answer the phone 24 hours a day</li>
+        <li>Powered by our Lead Finder so we reach the right people</li>
+      </ul>
+      <button class="btn btn-primary" onclick="openChat('marketing')">Put a team on my business</button>
+    </div>
+    <div class="channels reveal">
+      <div><span class="e">📞</span><b>Calls</b><small>Daily outbound</small></div>
+      <div><span class="e">💬</span><b>Messages</b><small>Texts &amp; DMs</small></div>
+      <div><span class="e">🚪</span><b>Door-to-Door</b><small>Face-to-face reach</small></div>
+      <div><span class="e">🕐</span><b>24/7 Phones</b><small>Never miss a lead</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- HERMES -->
+<section id="hermes">
+  <div class="wrap">
+    <div class="hermes-box reveal">
+      <div class="glow" style="width:320px;height:320px;background:#7c5cff;top:-80px;right:-80px"></div>
+      <div style="position:relative">
+        <span class="eyebrow">Meet Hermes</span>
+        <h2 class="title">Our own AI, <span class="grad-text">included</span> with your package.</h2>
+        <p class="sub" style="margin-bottom:26px">Hermes is the KleOs AI built to support your marketing. Ask questions, brainstorm ideas, and get help moving faster. You get it with every package.</p>
+        <button class="btn btn-primary" onclick="openChat('marketing')">Get Hermes with my package</button>
+      </div>
+      <div class="terminal" style="position:relative">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div id="term"></div><span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD FINDER -->
+<section style="padding-top:20px">
+  <div class="wrap split">
+    <div class="lf-card reveal">
+      <div style="display:flex;justify-content:space-between;margin-bottom:16px"><b style="font-family:'Space Grotesk'">🎯 Lead Finder</b><span class="tag">Live</span></div>
+      <div class="lf-row"><div class="lf-av">🍕</div><div><b>Restaurants</b><small>Local owners ready to talk</small></div><span class="tag">Find</span></div>
+      <div class="lf-row"><div class="lf-av">💇</div><div><b>Salons &amp; Barbers</b><small>Need more bookings</small></div><span class="tag">Find</span></div>
+      <div class="lf-row"><div class="lf-av">🔧</div><div><b>Contractors</b><small>Need more calls</small></div><span class="tag">Find</span></div>
+      <div class="lf-row" style="margin-bottom:0"><div class="lf-av">🏪</div><div><b>Local Shops</b><small>Need more foot traffic</small></div><span class="tag">Find</span></div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Lead Finder</span>
+      <h2 class="title">Find your next customer in <span class="grad-text">seconds</span>.</h2>
+      <p class="sub" style="margin-bottom:26px">Our lead finder helps you discover local businesses and prospects fast. It's included with KleOs at little to no cost at all.</p>
+      <button class="btn btn-primary" onclick="openChat('marketing')">Get Lead Finder access</button>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="games" id="games">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Free to play</span><h2 class="title">The KleOs <span class="grad-text">Game Hub</span>.</h2><p class="sub">A free game with many games and mini games inside. Take a break, play a round, come back stronger.</p></div>
+    <div class="game-shell reveal">
+      <div class="g-tabs">
+        <button class="g-tab on" data-g="ttt">❌⭕ Tic-Tac-Toe</button>
+        <button class="g-tab" data-g="tap">⚡ Tap Rush</button>
+        <button class="g-tab" data-g="mem">🧠 Memory Match</button>
+      </div>
+      <div class="g-body" id="gbody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGE -->
+<section id="package">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">One package</span><h2 class="title">Everything. <span class="grad-text">One price.</span></h2><p class="sub">Cheaper than any other price you've seen, with more included than anyone else offers.</p></div>
+    <div class="pack">
+      <div class="pack-main reveal">
+        <span class="ribbon">ALL-IN-ONE</span>
+        <h3>The KleOs Package</h3>
+        <div class="price-line"><b>Lowest price</b> you'll find. Ask us and see.</div>
+        <ul class="checks" style="margin-top:0">
+          <li>Website design</li>
+          <li>Social media management</li>
+          <li>Google review boost &amp; management</li>
+          <li>Bad review removal</li>
+          <li>Hermes AI included</li>
+          <li>Lead Finder access</li>
+          <li>Logos, designs, flyers &amp; more</li>
+          <li>Business questions answered</li>
+          <li>Diagnostics &amp; support</li>
+          <li>Door-to-door outreach, calls &amp; messages</li>
+          <li>24/7 phone answering</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="openChat('marketing')">Get my package</button>
+      </div>
+      <div class="challenge reveal">
+        <span class="eyebrow">Price challenge</span>
+        <h3>Got a quote somewhere else? Bring it.</h3>
+        <p>We'll challenge any price from people who only ask to scam you, or who simply don't know what they're doing.</p>
+        <p>You deserve to know what you're paying for and exactly what you get. No hidden games, no runaround.</p>
+        <div class="win-quote">We don't have to talk about our wins. We can brag about them.</div>
+        <a class="btn btn-ghost" href="tel:+19563179493">📞 Call and compare</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Why KleOs</span><h2 class="title">Built different, <span class="grad-text">on purpose</span>.</h2></div>
+    <div class="res-grid">
+      <div class="res reveal"><b class="grad-text">24/7</b><span>Phone always answered</span></div>
+      <div class="res reveal"><b class="grad-text">11+</b><span>Services in one package</span></div>
+      <div class="res reveal"><b class="grad-text">Daily</b><span>Outreach to prospects</span></div>
+      <div class="res reveal"><b class="grad-text">1</b><span>Team for everything</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">How it works</span><h2 class="title">From hello to <span class="grad-text">growth</span>.</h2></div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><h4>Tell us about you</h4><p>Click "Need Marketing" and answer a few quick questions.</p></div>
+      <div class="step reveal"><div class="n">02</div><h4>We contact you</h4><p>Someone from our team reaches out shortly to talk through your goals.</p></div>
+      <div class="step reveal"><div class="n">03</div><h4>We build &amp; launch</h4><p>Website, brand, reviews, social and outreach all start moving.</p></div>
+      <div class="step reveal"><div class="n">04</div><h4>You get clients</h4><p>Constant movement, calls answered, and leads coming in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section class="careers" id="careers">
+  <div class="wrap">
+    <div class="career-box reveal">
+      <div>
+        <span class="badge-top">💼 We're hiring</span>
+        <h2 class="title">Sales rep. Earn <span class="grad-text">40%</span> commission.</h2>
+        <p class="sub" style="margin-bottom:20px">Join KleOs and sell a marketing package businesses actually want. Your earnings are tied to your effort, with one of the highest commissions out there.</p>
+        <ul class="checks" style="margin-top:0">
+          <li>40% commission on every sale you close</li>
+          <li>A real product, Lead Finder and Hermes AI behind you</li>
+          <li>Warm leads and a team that supports you</li>
+          <li>The harder you work, the more you earn</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openChat('apply')">Apply Now</button>
+      </div>
+      <div class="comm"><b>40%</b><span>commission on every sale</span><p style="margin-top:14px;color:var(--muted);font-size:.9rem">Sales position &middot; 18+ &middot; Motivated people welcome</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center reveal"><span class="eyebrow">Questions</span><h2 class="title">Quick <span class="grad-text">answers</span>.</h2></div>
+    <div class="faq reveal">
+      <details><summary>What's included in the package?</summary><p>Websites, social media, Google review boost and management, bad review removal, Hermes AI, Lead Finder, custom design, business guidance, diagnostics, door-to-door outreach and 24/7 phone answering.</p></details>
+      <details><summary>Is Hermes a real AI?</summary><p>Hermes is KleOs's own AI, included with your package to help you with your marketing and business.</p></details>
+      <details><summary>Can you remove bad Google reviews?</summary><p>Yes, review removal and management is part of our package. Tell us your situation and we'll look at the best path.</p></details>
+      <details><summary>How fast will someone contact me?</summary><p>Submit the Need Marketing form and someone from our team will contact you shortly. You can also call us any time, day or night.</p></details>
+      <details><summary>How do I apply for the sales job?</summary><p>Click "Apply Now" anywhere on the page and answer a few short questions. It takes about two minutes.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <h2>Ready to grow with KleOs?</h2>
+      <p>Tell us what you need and we'll take it from there.</p>
+      <button class="btn" onclick="openChat('marketing')">🚀 I Need Marketing</button>
+      <button class="btn" onclick="openChat('apply')">💼 I Want to Apply</button>
+    </div>
+    <div class="contact-grid">
+      <a class="c-card reveal" href="tel:+19563179493"><span class="e">📞</span><b>Call us 24/7</b><span>(956) 317-9493</span></a>
+      <a class="c-card reveal" href="sms:+19563179493"><span class="e">💬</span><b>Text us</b><span>(956) 317-9493</span></a>
+      <a class="c-card reveal" href="mailto:kleosstudio7@gmail.com"><span class="e">✉️</span><b>Email us</b><span>kleosstudio7@gmail.com</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="logo"><span class="logo-mark">K</span>KleOs</div>
+    <div class="foot-links">
+      <a href="#services">Services</a><a href="#door">Door-to-Door</a><a href="#hermes">Hermes AI</a><a href="#games">Games</a><a href="#careers">Careers</a><a href="tel:+19563179493">(956) 317-9493</a><a href="mailto:kleosstudio7@gmail.com">kleosstudio7@gmail.com</a>
+    </div>
+    <div>© <span id="yr"></span> KleOs. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="fab">
+  <button class="btn btn-primary" onclick="openChat('marketing')">💬 Need Marketing</button>
+</div>
+
+<!-- CHAT MODAL -->
+<div class="overlay" id="overlay">
+  <div class="chat" role="dialog" aria-modal="true">
+    <div class="chat-head">
+      <div class="hc-av">K</div>
+      <div><b id="chatTitle">KleOs Assistant</b><small>● online</small></div>
+      <button class="x-btn" onclick="closeChat()" aria-label="Close">✕</button>
+    </div>
+    <div class="prog"><i id="prog"></i></div>
+    <div class="msgs" id="msgs"></div>
+    <div class="chips" id="chips"></div>
+    <form class="chat-in" id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="Type your answer..." maxlength="600">
+      <button class="send" type="submit" aria-label="Send">➤</button>
+    </form>
+    <div class="done-screen" id="done">
+      <div class="check-circle"><svg viewBox="0 0 64 64"><path d="M14 34 l14 14 l24 -28"/></svg></div>
+      <h3 id="doneTitle">Submitted!</h3>
+      <p id="doneText">Someone will contact you shortly.</p>
+      <button class="btn btn-primary" onclick="closeChat()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ========= SETTINGS ========= */
+const CONTACT_EMAIL = "kleosstudio7@gmail.com";
+const CONTACT_PHONE = "(956) 317-9493";
+
+/* ========= BASIC UI ========= */
+document.getElementById('yr').textContent = new Date().getFullYear();
+document.getElementById('burger').onclick = () => document.getElementById('navLinks').classList.toggle('open');
+document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+const items = ["Websites","Social Media","Google Reviews","Review Removal","Hermes AI","Lead Finder","Logos & Design","Flyers","Business Help","Diagnostics","Door-to-Door","24/7 Phones"];
+const mq = document.getElementById('marq');
+mq.innerHTML = [...items, ...items].map(i => `<span>${i}</span>`).join('');
+
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.querySelectorAll('.card').forEach(c => c.addEventListener('mousemove', e => {
+  const r = c.getBoundingClientRect();
+  c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+}));
+
+/* Hermes terminal typing */
+(function(){
+  const lines = [
+    ["q","> Hermes, who should I contact today?"],
+    ["a","Pulling 25 local prospects from Lead Finder..."],
+    ["q","> Write me a flyer headline."],
+    ["a","\"Your neighbors are searching. Be the one they find.\""],
+    ["q","> How do I get more 5-star reviews?"],
+    ["a","Ask right after a great experience. Want a script?"]
+  ];
+  const t = document.getElementById('term'); let i = 0;
+  function next(){
+    if (i >= lines.length){ setTimeout(()=>{ t.innerHTML=''; i=0; next(); }, 3500); return; }
+    const [c, txt] = lines[i++]; const p = document.createElement('p'); p.className = c; t.appendChild(p);
+    let k = 0; (function type(){ p.textContent = txt.slice(0, ++k); if (k < txt.length) setTimeout(type, 22); else setTimeout(next, 650); })();
+  }
+  next();
+})();
+
+/* ========= GAMES ========= */
+const gbody = document.getElementById('gbody');
+document.querySelectorAll('.g-tab').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.g-tab').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); loadGame(b.dataset.g);
+});
+let tapTimer = null;
+function loadGame(g){
+  clearInterval(tapTimer);
+  if (g === 'ttt') tttGame(); else if (g === 'tap') tapGame(); else memGame();
+}
+function tttGame(){
+  let board = Array(9).fill(''), over = false;
+  gbody.innerHTML = `<h3>Tic-Tac-Toe</h3><p class="g-info" id="tInfo">You are <b>X</b>. Your move!</p><div class="ttt" id="tGrid"></div><button class="btn btn-ghost" id="tReset">Restart</button>`;
+  const grid = document.getElementById('tGrid'), info = document.getElementById('tInfo');
+  const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  const win = b => { for (const [a,c,d] of lines) if (b[a] && b[a]===b[c] && b[a]===b[d]) return b[a]; return b.every(x=>x) ? 'tie' : null; };
+  function render(){
+    grid.innerHTML = '';
+    board.forEach((v,i) => { const b = document.createElement('button'); b.textContent = v; b.className = v.toLowerCase(); b.disabled = !!v || over; b.onclick = () => play(i); grid.appendChild(b); });
+  }
+  function bot(){
+    const empty = board.map((v,i)=>v?null:i).filter(v=>v!==null);
+    for (const who of ['O','X']) for (const i of empty){ const t=[...board]; t[i]=who; if (win(t)===who) return i; }
+    if (!board[4]) return 4;
+    return empty[Math.floor(Math.random()*empty.length)];
+  }
+  function end(r){ over = true; info.innerHTML = r==='X' ? '🎉 <b>You win!</b>' : r==='O' ? '🤖 <b>KleOs bot wins.</b> Try again!' : '🤝 <b>It\'s a tie.</b>'; }
+  function play(i){
+    if (board[i] || over) return; board[i]='X'; let r = win(board);
+    if (r){ end(r); render(); return; }
+    board[bot()]='O'; r = win(board); if (r) end(r); render();
+  }
+  document.getElementById('tReset').onclick = tttGame; render();
+}
+function tapGame(){
+  let score = 0, time = 10, running = false;
+  const best = Number(localStorage.getItem('kleosTap')||0);
+  gbody.innerHTML = `<h3>Tap Rush</h3><p class="g-info">Tap as many times as you can in 10 seconds.</p><button class="tap-btn" id="tapB">START</button><p class="g-info" id="tapI">Best: <b>${best}</b></p>`;
+  const btn = document.getElementById('tapB'), info = document.getElementById('tapI');
+  btn.onclick = () => {
+    if (!running){ running = true; score = 0; time = 10; btn.textContent = 'TAP!';
+      tapTimer = setInterval(() => { time--; info.innerHTML = `Time: <b>${time}</b> &middot; Taps: <b>${score}</b>`;
+        if (time <= 0){ clearInterval(tapTimer); running = false; btn.textContent = 'AGAIN';
+          const nb = Math.max(score, Number(localStorage.getItem('kleosTap')||0)); try{localStorage.setItem('kleosTap', nb);}catch(e){}
+          info.innerHTML = `Final: <b>${score}</b> taps &middot; Best: <b>${nb}</b>`; } }, 1000);
+      info.innerHTML = `Time: <b>10</b> &middot; Taps: <b>0</b>`;
+    } else { score++; info.innerHTML = `Time: <b>${time}</b> &middot; Taps: <b>${score}</b>`; }
+  };
+}
+function memGame(){
+  const emojis = ['🚀','⭐','🎯','💡','📈','🔥','💬','🏆'];
+  const deck = [...emojis, ...emojis].sort(() => Math.random() - .5);
+  let first = null, lock = false, moves = 0, found = 0;
+  gbody.innerHTML = `<h3>Memory Match</h3><p class="g-info" id="mInfo">Find all the pairs. Moves: <b>0</b></p><div class="mem" id="mGrid"></div><button class="btn btn-ghost" id="mReset">Restart</button>`;
+  const grid = document.getElementById('mGrid'), info = document.getElementById('mInfo');
+  deck.forEach(e => {
+    const b = document.createElement('button'); b.textContent = e;
+    b.onclick = () => {
+      if (lock || b.classList.contains('show') || b.classList.contains('done')) return;
+      b.classList.add('show');
+      if (!first){ first = b; return; }
+      moves++; lock = true; info.innerHTML = `Find all the pairs. Moves: <b>${moves}</b>`;
+      if (first.textContent === b.textContent){
+        first.classList.replace('show','done'); b.classList.replace('show','done'); first = null; lock = false; found++;
+        if (found === emojis.length) info.innerHTML = `🎉 You did it in <b>${moves}</b> moves!`;
+      } else setTimeout(() => { first.classList.remove('show'); b.classList.remove('show'); first = null; lock = false; }, 750);
+    };
+    grid.appendChild(b);
+  });
+  document.getElementById('mReset').onclick = memGame;
+}
+tttGame();
+
+/* ========= CHAT FLOWS ========= */
+const FLOWS = {
+  marketing: {
+    title: "KleOs Marketing Assistant",
+    subject: "New MARKETING lead from KleOs website",
+    doneTitle: "Submitted!",
+    doneText: "Thank you! Someone will contact you shortly.",
+    intro: ["Hey there! 👋 I'm the KleOs assistant.", "I'll ask a few quick questions so our team understands exactly what you need. Ready?"],
+    questions: [
+      { key: "Name", q: "First, what's your name?" },
+      { key: "Business name", q: "What's the name of your business?" },
+      { key: "Type of business", q: "What type of business do you have? (restaurant, salon, contractor, shop...)" },
+      { key: "Goals", q: "What are your main goals right now?" },
+      { key: "Biggest struggle", q: "What do you feel you're lacking or struggling with the most?" },
+      { key: "Services wanted", q: "Which of our services are you most interested in?", chips: ["Website","Social Media","Google Reviews","Logo & Design","Lead Finder","Hermes AI","Door-to-Door Outreach","Everything"] },
+      { key: "Current marketing", q: "Are you currently doing any marketing? If so, what?" },
+      { key: "Budget", q: "Do you have a monthly budget in mind?", chips: ["Under $300","$300 - $750","$750 - $1,500","$1,500+","Not sure yet"] },
+      { key: "Timeline", q: "How soon do you want to get started?", chips: ["Right away","This month","Within 3 months","Just exploring"] },
+      { key: "Phone", q: "What's the best phone number to reach you?", type: "phone" },
+      { key: "Email", q: "And your email address?", type: "email" },
+      { key: "Best time to contact", q: "What's the best time to contact you?", chips: ["Morning","Afternoon","Evening","Anytime"] }
+    ]
+  },
+  apply: {
+    title: "KleOs Careers",
+    subject: "New SALES JOB application from KleOs website",
+    doneTitle: "Application Submitted!",
+    doneText: "Thank you for applying! Someone will contact you shortly.",
+    intro: [
+      "Welcome to KleOs Careers! 💼",
+      "THE ROLE: Sales Representative.\nSell a marketing package that businesses actually want, backed by our AI (Hermes), our Lead Finder, and a team that supports you.",
+      "THE PAY: 40% commission on every sale you close. That's one of the highest commission rates around, and the harder you work, the more you earn. 💰",
+      "Let's get to know you. I'll ask a few simple questions, one at a time."
+    ],
+    questions: [
+      { key: "Name", q: "What's your full name?" },
+      { key: "Over 18", q: "Are you 18 years of age or older?", chips: ["Yes","No"], gate: a => /^y/i.test(a) },
+      { key: "Sales experience", q: "What sales experience do you have? (It's okay if it's none. Tell us honestly.)" },
+      { key: "Job experience", q: "What other job experience do you have?" },
+      { key: "Why KleOs", q: "Why do you want to work with KleOs?" },
+      { key: "Comfortable calling / messaging", q: "Are you comfortable calling and messaging potential clients all day?", chips: ["Yes, definitely","I can learn","Not really"] },
+      { key: "Availability", q: "What's your availability?", chips: ["Full-time","Part-time","Weekends only","Flexible"] },
+      { key: "Transportation", q: "Do you have reliable transportation?", chips: ["Yes","No"] },
+      { key: "Income goal", q: "What's your monthly income goal?" },
+      { key: "Start date", q: "How soon could you start?", chips: ["Immediately","Within 2 weeks","Within a month"] },
+      { key: "Phone", q: "What's the best phone number to reach you?", type: "phone" },
+      { key: "Email", q: "And your email address?", type: "email" }
+    ]
+  }
+};
+const THANKS = ["Thank you! 🙌 Let's keep moving.", "Great answer, thanks! Moving forward...", "Appreciate that! Next one.", "Awesome, thank you! Let's continue.", "Got it, thank you! 👍", "Thanks for sharing! On we go."];
+
+const overlay = document.getElementById('overlay'), msgs = document.getElementById('msgs'), chips = document.getElementById('chips');
+const form = document.getElementById('chatForm'), input = document.getElementById('chatInput'), prog = document.getElementById('prog'), done = document.getElementById('done');
+let flow = null, step = 0, answers = {}, busy = false, flowName = '';
+
+function addMsg(text, who){ const d = document.createElement('div'); d.className = 'm ' + who; d.textContent = text; msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d; }
+function typing(ms){ return new Promise(res => { const t = document.createElement('div'); t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>'; msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight; setTimeout(() => { t.remove(); res(); }, ms); }); }
+async function botSay(text, ms = 650){ await typing(ms); addMsg(text, 'bot'); }
+function setInput(on){ input.disabled = !on; form.querySelector('.send').disabled = !on; if (on) input.focus(); }
+
+async function openChat(name){
+  flowName = name; flow = FLOWS[name]; step = 0; answers = {}; busy = true;
+  document.getElementById('chatTitle').textContent = flow.title;
+  msgs.innerHTML = ''; chips.innerHTML = ''; prog.style.width = '0'; done.classList.remove('show');
+  [msgs, chips, form, document.querySelector('.prog')].forEach(e => e.style.display = '');
+  overlay.classList.add('open'); document.body.style.overflow = 'hidden'; setInput(false);
+  for (const line of flow.intro) await botSay(line, 800);
+  await ask();
+}
+function closeChat(){ overlay.classList.remove('open'); document.body.style.overflow = ''; busy = false; }
+overlay.addEventListener('click', e => { if (e.target === overlay) closeChat(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChat(); });
+
+async function ask(){
+  const q = flow.questions[step];
+  prog.style.width = (step / flow.questions.length * 100) + '%';
+  await botSay(q.q);
+  chips.innerHTML = '';
+  if (q.chips) q.chips.forEach(c => { const b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.textContent = c; b.onclick = () => submitAnswer(c); chips.appendChild(b); });
+  input.placeholder = q.chips ? 'Pick one or type your own...' : 'Type your answer...';
+  busy = false; setInput(true);
+}
+form.addEventListener('submit', e => { e.preventDefault(); submitAnswer(input.value); });
+
+async function submitAnswer(raw){
+  const val = raw.trim(); if (!val || busy) return;
+  const q = flow.questions[step];
+  if (q.type === 'phone' && val.replace(/\D/g,'').length < 10){ addMsg(val,'me'); input.value=''; await botSay("Hmm, that doesn't look like a full phone number. Could you include the area code?", 500); return; }
+  if (q.type === 'email' && !/^\S+@\S+\.\S+$/.test(val)){ addMsg(val,'me'); input.value=''; await botSay("That email doesn't look quite right. Could you double-check it?", 500); return; }
+  busy = true; setInput(false); chips.innerHTML = ''; input.value = '';
+  addMsg(val, 'me'); answers[q.key] = val;
+
+  if (q.gate && !q.gate(val)){
+    await botSay("Thank you for being honest! 🙏 Unfortunately this role is only open to applicants 18 and older. We'd love to hear from you when you're eligible!", 900);
+    setTimeout(closeChat, 3500); return;
+  }
+  step++;
+  if (step >= flow.questions.length){
+    prog.style.width = '100%';
+    await botSay("Thank you so much! 🎉 That's everything. Sending it to our team now...", 800);
+    return finish();
+  }
+  await botSay(THANKS[Math.floor(Math.random()*THANKS.length)], 500);
+  await ask();
+}
+
+async function finish(){
+  const payload = Object.assign({ _subject: flow.subject, _template: 'table', _captcha: 'false', "Submitted from": "KleOs website", "Submitted at": new Date().toLocaleString() }, answers);
+  let ok = false;
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/' + CONTACT_EMAIL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
+    ok = r.ok;
+  } catch(e){ ok = false; }
+  if (!ok){
+    // Fallback: open the visitor's email app with everything pre-filled
+    const body = Object.entries(answers).map(([k,v]) => k + ': ' + v).join('\n');
+    window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(flow.subject) + '&body=' + encodeURIComponent(body);
+  }
+  [msgs, chips, form, document.querySelector('.prog')].forEach(e => e.style.display = 'none');
+  document.getElementById('doneTitle').textContent = flow.doneTitle;
+  document.getElementById('doneText').textContent = flow.doneText;
+  done.classList.add('show');
+}
+</script>
+</body>
+</html>
